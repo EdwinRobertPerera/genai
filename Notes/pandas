@@ -1,0 +1,1208 @@
+
+# Pandas Single-Sheet Cheat Sheet
+
+```python
+import pandas as pd
+```
+
+## 1. Creating / Loading Data
+
+| Operation              | Syntax                           |
+| ---------------------- | -------------------------------- |
+| CSV → DataFrame        | `pd.read_csv("file.csv")`        |
+| Excel → DataFrame      | `pd.read_excel("file.xlsx")`     |
+| JSON → DataFrame       | `pd.read_json("file.json")`      |
+| SQL → DataFrame        | `pd.read_sql(query, connection)` |
+| Dictionary → DataFrame | `pd.DataFrame(data)`             |
+| List → DataFrame       | `pd.DataFrame(list_data)`        |
+| Series                 | `pd.Series(data)`                |
+| Date range             | `pd.date_range(...)`             |
+| Read clipboard         | `pd.read_clipboard()`            |
+
+---
+
+# 2. Exporting / Saving
+
+| Operation  | Syntax                                  |
+| ---------- | --------------------------------------- |
+| CSV        | `df.to_csv("file.csv", index=False)`    |
+| Excel      | `df.to_excel("file.xlsx", index=False)` |
+| JSON       | `df.to_json("file.json")`               |
+| SQL        | `df.to_sql(...)`                        |
+| Dictionary | `df.to_dict()`                          |
+| List       | `df.to_list()`                          |
+| Clipboard  | `df.to_clipboard()`                     |
+
+---
+
+# 3. Inspecting DataFrame
+
+```python
+df.head()
+df.head(10)
+
+df.tail()
+df.tail(10)
+
+df.sample(5)
+
+df.shape
+df.size
+
+df.columns
+df.index
+
+df.dtypes
+df.info()
+df.describe()
+
+df.memory_usage()
+
+df.ndim
+df.empty
+```
+
+### Most important
+
+```python
+df.head()
+df.shape
+df.columns
+df.dtypes
+df.info()
+df.describe()
+```
+
+---
+
+# 4. Selecting Data
+
+### Column
+
+```python
+df["name"]
+```
+
+### Multiple columns
+
+```python
+df[["name", "salary"]]
+```
+
+### Rows by position
+
+```python
+df.iloc[0]
+df.iloc[0:5]
+df.iloc[0, 1]
+df.iloc[0:5, 0:3]
+```
+
+### Rows by label
+
+```python
+df.loc[0]
+df.loc[0:5]
+df.loc[0, "name"]
+df.loc[:, "name"]
+```
+
+### Specific cells
+
+```python
+df.at[0, "name"]
+df.iat[0, 1]
+```
+
+---
+
+# 5. Filtering
+
+```python
+df[df["salary"] > 50000]
+
+df[df["state"] == "Kerala"]
+
+df[df["age"] < 25]
+
+df[
+    (df["salary"] > 50000) &
+    (df["age"] > 25)
+]
+
+df[
+    (df["state"] == "Kerala") |
+    (df["state"] == "Tamil Nadu")
+]
+```
+
+### `isin()`
+
+```python
+df[df["state"].isin(["Kerala", "Karnataka"])]
+```
+
+### `between()`
+
+```python
+df[df["age"].between(25, 30)]
+```
+
+### `query()`
+
+```python
+df.query("salary > 50000")
+```
+
+---
+
+# 6. Sorting
+
+```python
+df.sort_values("salary")
+
+df.sort_values(
+    "salary",
+    ascending=False
+)
+
+df.sort_values(
+    ["state", "salary"]
+)
+
+df.sort_index()
+
+df.sort_index(ascending=False)
+```
+
+---
+
+# 7. Basic Statistics
+
+```python
+df["salary"].sum()
+df["salary"].mean()
+df["salary"].median()
+df["salary"].mode()
+
+df["salary"].min()
+df["salary"].max()
+
+df["salary"].std()
+df["salary"].var()
+
+df["salary"].count()
+
+df["salary"].quantile(0.25)
+df["salary"].quantile(0.50)
+df["salary"].quantile(0.75)
+```
+
+### Multiple statistics
+
+```python
+df["salary"].agg(
+    ["count", "mean", "min", "max"]
+)
+```
+
+---
+
+# 8. Counting
+
+```python
+df["state"].value_counts()
+
+df["skill"].value_counts()
+
+df["active"].value_counts()
+
+df["state"].nunique()
+
+df["state"].unique()
+```
+
+### Number of rows
+
+```python
+len(df)
+df.shape[0]
+```
+
+---
+
+# 9. Missing Values
+
+```python
+df.isna()
+df.isnull()
+
+df.isna().sum()
+
+df.notna()
+
+df.dropna()
+
+df.dropna(axis=0)
+
+df.dropna(axis=1)
+
+df.fillna(0)
+
+df.fillna("Unknown")
+
+df["salary"].fillna(
+    df["salary"].mean()
+)
+```
+
+### Check whether missing values exist
+
+```python
+df.isna().any()
+
+df.isna().sum().sum()
+```
+
+---
+
+# 10. Duplicates
+
+```python
+df.duplicated()
+
+df.duplicated().sum()
+
+df.drop_duplicates()
+
+df.drop_duplicates(
+    subset=["name"]
+)
+```
+
+---
+
+# 11. Adding Columns
+
+```python
+df["salary_lakhs"] = df["salary"] / 100000
+```
+
+```python
+df["is_high_salary"] = (
+    df["salary"] > 60000
+)
+```
+
+### Multiple columns
+
+```python
+df["annual_salary"] = df["salary"] * 12
+```
+
+---
+
+# 12. Modify Columns
+
+```python
+df["name"] = df["name"].str.upper()
+
+df["salary"] = df["salary"] * 1.10
+```
+
+### `apply()`
+
+```python
+df["salary"].apply(
+    lambda x: x * 1.10
+)
+```
+
+Function:
+
+```python
+def category(x):
+    if x >= 70000:
+        return "High"
+    return "Normal"
+
+df["category"] = df["salary"].apply(category)
+```
+
+---
+
+# 13. Rename
+
+```python
+df.rename(
+    columns={
+        "name": "employee_name",
+        "salary": "monthly_salary"
+    }
+)
+```
+
+Rename index:
+
+```python
+df.rename(
+    index={0: "first"}
+)
+```
+
+---
+
+# 14. Delete
+
+### Column
+
+```python
+df.drop(
+    columns=["age"]
+)
+```
+
+### Row
+
+```python
+df.drop(index=0)
+```
+
+### Multiple
+
+```python
+df.drop(
+    columns=["age", "state"]
+)
+```
+
+---
+
+# 15. String Operations
+
+For:
+
+```python
+df["name"].str
+```
+
+Common operations:
+
+```python
+.str.upper()
+.str.lower()
+.str.title()
+
+.str.len()
+
+.str.strip()
+
+.str.contains("a")
+
+.str.startswith("A")
+.str.endswith("a")
+
+.str.replace("old", "new")
+
+.str.split()
+
+.str.slice(0, 3)
+
+.str.extract(...)
+
+.str.findall(...)
+```
+
+Example:
+
+```python
+df[
+    df["name"].str.contains(
+        "a",
+        case=False
+    )
+]
+```
+
+---
+
+# 16. Date / Time
+
+Convert:
+
+```python
+df["joining_date"] = pd.to_datetime(
+    df["joining_date"]
+)
+```
+
+Then:
+
+```python
+df["joining_date"].dt.year
+df["joining_date"].dt.month
+df["joining_date"].dt.day
+
+df["joining_date"].dt.day_name()
+
+df["joining_date"].dt.month_name()
+
+df["joining_date"].dt.dayofweek
+```
+
+### Date difference
+
+```python
+pd.Timestamp.today() - df["joining_date"]
+```
+
+### Date range
+
+```python
+pd.date_range(
+    start="2026-01-01",
+    end="2026-12-31"
+)
+```
+
+---
+
+# 17. GroupBy
+
+### Average salary by state
+
+```python
+df.groupby("state")["salary"].mean()
+```
+
+### Maximum salary by skill
+
+```python
+df.groupby("skill")["salary"].max()
+```
+
+### Count
+
+```python
+df.groupby("state").size()
+```
+
+### Multiple aggregations
+
+```python
+df.groupby("state")["salary"].agg(
+    ["count", "mean", "min", "max"]
+)
+```
+
+### Multiple columns
+
+```python
+df.groupby(
+    ["state", "skill"]
+)["salary"].mean()
+```
+
+---
+
+# 18. `agg()`
+
+```python
+df["salary"].agg(
+    ["mean", "min", "max"]
+)
+```
+
+Multiple columns:
+
+```python
+df.agg({
+    "salary": ["mean", "max"],
+    "age": ["mean", "min"],
+    "performance_rating": ["mean", "max"]
+})
+```
+
+---
+
+# 19. `transform()`
+
+Useful when you want a group calculation returned to every original row.
+
+```python
+df["state_avg_salary"] = (
+    df.groupby("state")["salary"]
+      .transform("mean")
+)
+```
+
+Now every employee gets their state's average salary.
+
+---
+
+# 20. `map()`
+
+```python
+df["active"].map({
+    "Yes": True,
+    "No": False
+})
+```
+
+Or:
+
+```python
+df["salary"].map(
+    lambda x: x / 100000
+)
+```
+
+---
+
+# 21. Replace Values
+
+```python
+df["active"].replace({
+    "Yes": True,
+    "No": False
+})
+```
+
+Simple:
+
+```python
+df["state"].replace(
+    "Kerala",
+    "KL"
+)
+```
+
+---
+
+# 22. `where()` / `mask()`
+
+```python
+df["salary"].where(
+    df["salary"] > 50000
+)
+```
+
+```python
+df["salary"].mask(
+    df["salary"] < 50000
+)
+```
+
+---
+
+# 23. Combine DataFrames
+
+### Concatenate vertically
+
+```python
+pd.concat(
+    [df1, df2]
+)
+```
+
+### Concatenate horizontally
+
+```python
+pd.concat(
+    [df1, df2],
+    axis=1
+)
+```
+
+---
+
+# 24. Merge / Join
+
+Extremely important for real-world data.
+
+```python
+pd.merge(
+    df1,
+    df2,
+    on="employee_id"
+)
+```
+
+### Inner join
+
+```python
+pd.merge(
+    df1,
+    df2,
+    on="employee_id",
+    how="inner"
+)
+```
+
+### Left join
+
+```python
+pd.merge(
+    df1,
+    df2,
+    on="employee_id",
+    how="left"
+)
+```
+
+### Right join
+
+```python
+pd.merge(
+    df1,
+    df2,
+    on="employee_id",
+    how="right"
+)
+```
+
+### Outer join
+
+```python
+pd.merge(
+    df1,
+    df2,
+    on="employee_id",
+    how="outer"
+)
+```
+
+---
+
+# 25. Join
+
+```python
+df1.join(df2)
+```
+
+On a key:
+
+```python
+df1.join(
+    df2,
+    on="employee_id"
+)
+```
+
+---
+
+# 26. Pivot Tables
+
+```python
+pd.pivot_table(
+    df,
+    values="salary",
+    index="state",
+    aggfunc="mean"
+)
+```
+
+Multiple dimensions:
+
+```python
+pd.pivot_table(
+    df,
+    values="salary",
+    index="state",
+    columns="skill",
+    aggfunc="mean"
+)
+```
+
+---
+
+# 27. Crosstab
+
+```python
+pd.crosstab(
+    df["state"],
+    df["skill"]
+)
+```
+
+---
+
+# 28. Reshaping
+
+```python
+df.melt()
+```
+
+```python
+df.pivot(
+    index="name",
+    columns="skill",
+    values="salary"
+)
+```
+
+```python
+df.pivot_table(...)
+```
+
+---
+
+# 29. Index Operations
+
+```python
+df.set_index("employee_id")
+
+df.reset_index()
+
+df.index
+
+df.index.name
+
+df.rename_axis("employees")
+```
+
+---
+
+# 30. Copy
+
+```python
+new_df = df.copy()
+```
+
+Prefer this when you want an independent DataFrame.
+
+---
+
+# 31. Transpose
+
+```python
+df.T
+```
+
+Rows become columns and columns become rows.
+
+---
+
+# 32. Mathematical Operations
+
+```python
+df["salary"].abs()
+
+df["salary"].round()
+
+df["salary"].clip(
+    lower=30000,
+    upper=80000
+)
+```
+
+---
+
+# 33. Boolean Operations
+
+```python
+df["salary"].gt(50000)
+
+df["salary"].lt(50000)
+
+df["salary"].ge(50000)
+
+df["salary"].le(50000)
+
+df["salary"].eq(50000)
+
+df["salary"].ne(50000)
+```
+
+Equivalent to:
+
+```python
+df["salary"] > 50000
+df["salary"] < 50000
+df["salary"] >= 50000
+df["salary"] <= 50000
+df["salary"] == 50000
+df["salary"] != 50000
+```
+
+---
+
+# 34. `query()`
+
+```python
+df.query(
+    "salary > 50000"
+)
+```
+
+Multiple conditions:
+
+```python
+df.query(
+    "salary > 50000 and age > 25"
+)
+```
+
+---
+
+# 35. `eval()`
+
+Useful for expressions involving columns:
+
+```python
+df.eval(
+    "annual_salary = salary * 12"
+)
+```
+
+---
+
+# 36. Finding Positions
+
+```python
+df["salary"].idxmax()
+
+df["salary"].idxmin()
+```
+
+Example:
+
+```python
+df.loc[
+    df["salary"].idxmax()
+]
+```
+
+---
+
+# 37. Ranking
+
+```python
+df["salary"].rank()
+```
+
+Highest salary first:
+
+```python
+df["salary"].rank(
+    ascending=False
+)
+```
+
+---
+
+# 38. Cumulative Operations
+
+```python
+df["salary"].cumsum()
+
+df["salary"].cummax()
+
+df["salary"].cummin()
+
+df["salary"].cumprod()
+```
+
+---
+
+# 39. Percentage Change
+
+```python
+df["salary"].pct_change()
+```
+
+---
+
+# 40. Shift
+
+```python
+df["salary"].shift(1)
+
+df["salary"].shift(-1)
+```
+
+Useful for comparing a row with the previous/next row.
+
+---
+
+# 41. Correlation
+
+```python
+df.corr(numeric_only=True)
+```
+
+---
+
+# 42. Covariance
+
+```python
+df.cov(numeric_only=True)
+```
+
+---
+
+# 43. Duplicates / Unique
+
+```python
+df["skill"].unique()
+
+df["skill"].nunique()
+
+df["skill"].value_counts()
+
+df.duplicated()
+
+df.drop_duplicates()
+```
+
+---
+
+# 44. Data Types
+
+```python
+df.dtypes
+
+df["age"].astype(float)
+
+df["salary"].astype(int)
+
+df["active"].astype(bool)
+```
+
+Better for Yes/No:
+
+```python
+df["active"] = df["active"].map({
+    "Yes": True,
+    "No": False
+})
+```
+
+---
+
+# 45. Conditional Replacement
+
+```python
+df["salary"] = df["salary"].where(
+    df["salary"] > 40000,
+    40000
+)
+```
+
+Or:
+
+```python
+df["category"] = "Normal"
+
+df.loc[
+    df["salary"] >= 70000,
+    "category"
+] = "High"
+```
+
+This `loc + condition` pattern is **very important**.
+
+---
+
+# 46. Display Options
+
+```python
+pd.set_option(
+    "display.max_rows",
+    None
+)
+
+pd.set_option(
+    "display.max_columns",
+    None
+)
+```
+
+Reset:
+
+```python
+pd.reset_option("display.max_rows")
+```
+
+---
+
+# 47. Useful DataFrame Methods — Quick Reference
+
+```text
+head()
+tail()
+sample()
+info()
+describe()
+shape
+size
+columns
+index
+dtypes
+memory_usage()
+
+loc[]
+iloc[]
+at[]
+iat[]
+
+sort_values()
+sort_index()
+
+groupby()
+agg()
+transform()
+
+value_counts()
+unique()
+nunique()
+
+mean()
+median()
+mode()
+sum()
+min()
+max()
+count()
+std()
+var()
+quantile()
+
+isna()
+isnull()
+notna()
+dropna()
+fillna()
+
+duplicated()
+drop_duplicates()
+
+rename()
+drop()
+insert()
+
+apply()
+map()
+replace()
+
+astype()
+
+query()
+eval()
+
+merge()
+join()
+concat()
+
+pivot()
+pivot_table()
+melt()
+crosstab()
+
+set_index()
+reset_index()
+
+copy()
+
+corr()
+cov()
+
+rank()
+cumsum()
+cummax()
+cummin()
+cumprod()
+pct_change()
+shift()
+
+to_csv()
+to_excel()
+to_json()
+to_sql()
+to_dict()
+```
+
+---
+
+# 48. Pandas Functions You Should Know
+
+These are functions called through `pd.` rather than through `df`:
+
+```python
+pd.read_csv()
+pd.read_excel()
+pd.read_json()
+pd.read_sql()
+
+pd.DataFrame()
+pd.Series()
+
+pd.concat()
+pd.merge()
+
+pd.to_datetime()
+pd.to_numeric()
+pd.to_timedelta()
+
+pd.date_range()
+pd.timedelta_range()
+
+pd.crosstab()
+pd.pivot_table()
+
+pd.isna()
+pd.notna()
+
+pd.isnull()
+pd.notnull()
+
+pd.cut()
+pd.qcut()
+
+pd.unique()
+pd.factorize()
+
+pd.get_dummies()
+
+pd.melt()
+
+pd.to_numeric()
+```
+
+---
+
+# The important distinction
+
+Don't try to memorize this entire sheet.
+
+There are basically **three things** you need to distinguish:
+
+```text
+                 PANDAS
+                   │
+       ┌───────────┴───────────┐
+       │                       │
+      pd.                     df
+       │                       │
+Functions                 DataFrame methods
+       │                       │
+pd.read_csv()             df.head()
+pd.to_datetime()          df.sort_values()
+pd.merge()                df.groupby()
+pd.concat()               df.drop()
+pd.DataFrame()            df.fillna()
+                           df.to_csv()
+```
+
+And then there are **Series operations**:
+
+```python
+df["salary"].mean()
+df["salary"].max()
+df["name"].str.upper()
+df["state"].value_counts()
+```
+
+
+
+

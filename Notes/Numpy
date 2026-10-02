@@ -1,0 +1,678 @@
+
+## Array Creation
+
+```text
+np.array()             → creates a NumPy array
+np.asarray()           → converts input into a NumPy array
+np.zeros()             → creates an array filled with 0
+np.ones()              → creates an array filled with 1
+np.full()              → creates an array filled with a specified value
+np.empty()             → creates an uninitialized array
+np.zeros_like()        → creates zeros with the same shape as another array
+np.ones_like()         → creates ones with the same shape as another array
+np.full_like()         → creates an array with the same shape as another array
+np.empty_like()        → creates an uninitialized array with the same shape
+np.eye()               → creates an identity matrix
+np.identity()          → creates an identity matrix
+np.arange()            → creates evenly spaced values using a step
+np.linspace()          → creates evenly spaced values between two limits
+np.logspace()          → creates logarithmically spaced values
+np.geomspace()         → creates geometrically spaced values
+np.meshgrid()          → creates coordinate grids
+np.diag()              → creates/extracts a diagonal
+np.diagflat()          → creates a diagonal matrix from flattened input
+np.tri()               → creates a triangular matrix
+np.vander()            → creates a Vandermonde matrix
+np.fromiter()          → creates an array from an iterable
+np.fromstring()        → creates an array from a string
+np.frombuffer()        → creates an array from a buffer
+```
+
+---
+
+# Array Information
+
+```text
+a.ndim                 → number of dimensions
+a.shape                → size of each dimension
+a.size                 → total number of elements
+a.dtype                → data type of elements
+a.itemsize             → bytes used by each element
+a.nbytes               → total bytes used by the array
+a.T                    → transpose of the array
+a.strides               → bytes to step in each dimension
+a.flags                → memory/layout information
+```
+
+---
+
+# Reshaping / Changing Shape
+
+```text
+np.reshape()            → changes the shape of an array
+np.ravel()              → flattens an array
+np.squeeze()            → removes dimensions of size 1
+np.expand_dims()        → adds a dimension
+np.transpose()          → transposes an array
+np.swapaxes()           → swaps two axes
+np.moveaxis()           → moves an axis to another position
+np.atleast_1d()         → converts input to at least 1D
+np.atleast_2d()         → converts input to at least 2D
+np.atleast_3d()         → converts input to at least 3D
+```
+
+Array methods:
+
+```text
+a.reshape()             → changes array shape
+a.flatten()             → returns a flattened copy
+a.ravel()               → returns a flattened array
+a.transpose()           → transposes the array
+a.squeeze()             → removes dimensions of size 1
+```
+
+---
+
+# Joining Arrays
+
+```text
+np.concatenate()        → joins arrays along an existing axis
+np.stack()              → joins arrays by creating a new axis
+np.vstack()             → stacks arrays vertically
+np.hstack()             → stacks arrays horizontally
+np.dstack()             → stacks arrays along the third axis
+np.column_stack()       → stacks 1D arrays as columns
+np.row_stack()          → stacks arrays as rows
+np.block()              → builds an array from nested blocks
+```
+
+---
+
+# Splitting Arrays
+
+```text
+np.split()              → splits an array into equal sections
+np.array_split()        → splits an array into sections that can be unequal
+np.hsplit()             → splits horizontally
+np.vsplit()             → splits vertically
+np.dsplit()             → splits along the third axis
+```
+
+---
+
+# Arithmetic
+
+```text
+np.add()                → adds two arrays element-by-element
+np.subtract()           → subtracts arrays element-by-element
+np.multiply()           → multiplies arrays element-by-element
+np.divide()             → divides arrays element-by-element
+np.true_divide()        → performs true division
+np.floor_divide()       → performs floor division
+np.power()              → raises elements to a power
+np.square()             → squares every element
+np.reciprocal()         → calculates 1/x for every element
+np.mod()                → calculates remainder
+np.remainder()          → calculates remainder
+np.fmod()               → calculates remainder using C-style behavior
+```
+
+You can also simply use:
+
+```text
+a + b                   → element-wise addition
+a - b                   → element-wise subtraction
+a * b                   → element-wise multiplication
+a / b                   → element-wise division
+a // b                  → element-wise floor division
+a % b                   → element-wise remainder
+a ** b                  → element-wise power
+```
+
+---
+
+# Absolute Value / Sign
+
+```text
+np.abs()                → absolute value
+np.absolute()           → absolute value
+np.fabs()               → absolute value for floating-point values
+np.sign()               → gives the sign of each value
+np.signbit()            → checks whether values have a negative sign
+```
+
+---
+
+# Rounding
+
+```text
+np.round()              → rounds values
+np.around()             → rounds values
+np.floor()              → rounds down
+np.ceil()               → rounds up
+np.trunc()              → removes decimal part
+np.fix()                → rounds toward zero
+np.rint()               → rounds to nearest integer
+```
+
+---
+
+# Exponential / Logarithmic
+
+```text
+np.exp()                → calculates e^x
+np.exp2()               → calculates 2^x
+np.expm1()              → calculates e^x - 1 accurately
+np.log()                → natural logarithm
+np.log2()               → logarithm base 2
+np.log10()              → logarithm base 10
+np.log1p()              → calculates log(1+x) accurately
+```
+
+---
+
+# Trigonometry
+
+```text
+np.sin()                → sine
+np.cos()                → cosine
+np.tan()                → tangent
+
+np.arcsin()             → inverse sine
+np.arccos()             → inverse cosine
+np.arctan()             → inverse tangent
+np.arctan2()            → angle from x and y coordinates
+
+np.sinh()               → hyperbolic sine
+np.cosh()               → hyperbolic cosine
+np.tanh()               → hyperbolic tangent
+
+np.arcsinh()            → inverse hyperbolic sine
+np.arccosh()            → inverse hyperbolic cosine
+np.arctanh()            → inverse hyperbolic tangent
+
+np.degrees()             → converts radians to degrees
+np.radians()             → converts degrees to radians
+np.deg2rad()             → converts degrees to radians
+np.rad2deg()             → converts radians to degrees
+```
+
+---
+
+# Aggregation / Statistics
+
+```text
+np.sum()                → gives the sum of an array
+np.prod()               → gives the product of an array
+np.cumsum()             → cumulative sum
+np.cumprod()            → cumulative product
+
+np.mean()               → gives the average
+np.average()             → calculates weighted/unweighted average
+np.median()             → gives the median
+
+np.std()                → gives standard deviation
+np.var()                → gives variance
+
+np.min()                → gives minimum value
+np.max()                → gives maximum value
+np.ptp()                → gives range (maximum - minimum)
+
+np.percentile()         → calculates percentile
+np.quantile()           → calculates quantile
+```
+
+---
+
+# NaN Statistics
+
+```text
+np.nanmean()            → mean while ignoring NaN
+np.nanmedian()          → median while ignoring NaN
+np.nanstd()             → standard deviation while ignoring NaN
+np.nanvar()             → variance while ignoring NaN
+np.nanmin()             → minimum while ignoring NaN
+np.nanmax()             → maximum while ignoring NaN
+np.nansum()             → sum while ignoring NaN
+np.nanprod()            → product while ignoring NaN
+np.nanpercentile()      → percentile while ignoring NaN
+np.nanquantile()        → quantile while ignoring NaN
+```
+
+---
+
+# Searching / Finding
+
+```text
+np.argmax()             → index of the largest value
+np.argmin()             → index of the smallest value
+np.nanargmax()          → index of largest non-NaN value
+np.nanargmin()          → index of smallest non-NaN value
+np.where()              → finds indices based on a condition
+np.nonzero()            → finds indices of non-zero elements
+np.argwhere()           → returns indices where condition is true
+np.flatnonzero()        → returns flattened indices of non-zero elements
+np.searchsorted()       → finds where values should be inserted
+```
+
+For example:
+
+```python
+a = np.array([10, 20, 30, 40])
+
+np.argmax(a)
+```
+
+```text
+3
+```
+
+Because `40` is at index `3`.
+
+---
+
+# Sorting
+
+```text
+np.sort()               → returns sorted array
+np.argsort()            → returns indices that would sort the array
+np.partition()          → partially sorts an array
+np.argpartition()       → indices for a partial sort
+np.lexsort()            → performs indirect sorting using multiple keys
+```
+
+---
+
+# Comparison
+
+```text
+np.equal()              → checks ==
+np.not_equal()          → checks !=
+np.greater()            → checks >
+np.greater_equal()      → checks >=
+np.less()               → checks <
+np.less_equal()         → checks <=
+
+np.maximum()            → element-wise maximum
+np.minimum()            → element-wise minimum
+np.fmax()               → maximum while handling NaN specially
+np.fmin()               → minimum while handling NaN specially
+```
+
+---
+
+# Logical Operations
+
+```text
+np.logical_and()        → logical AND
+np.logical_or()         → logical OR
+np.logical_not()        → logical NOT
+np.logical_xor()        → logical XOR
+
+np.all()                → checks if all values are True
+np.any()                → checks if at least one value is True
+
+np.isclose()            → checks whether values are approximately equal
+np.allclose()           → checks whether all values are approximately equal
+```
+
+---
+
+# Checking Values
+
+```text
+np.isnan()              → checks for NaN
+np.isinf()              → checks for infinity
+np.isfinite()           → checks for finite values
+
+np.isreal()             → checks whether values are real
+np.iscomplex()          → checks whether values are complex
+
+np.isrealobj()          → checks whether an object contains real values
+np.iscomplexobj()       → checks whether an object contains complex values
+
+np.isscalar()           → checks whether input is scalar
+np.issubdtype()         → checks whether a dtype belongs to another dtype category
+np.can_cast()           → checks whether one dtype can be safely cast to another
+```
+
+---
+
+# Set Operations
+
+```text
+np.unique()             → returns unique values
+np.union1d()            → union of two arrays
+np.intersect1d()        → common values between arrays
+np.setdiff1d()          → values in first array but not second
+np.setxor1d()           → values appearing in only one array
+np.isin()               → checks whether elements exist in another array
+```
+
+---
+
+# Indexing / Selecting
+
+```text
+np.take()               → takes elements at specified indices
+np.take_along_axis()    → takes values along an axis using indices
+np.put()                → replaces elements at specified indices
+np.put_along_axis()     → replaces values along an axis
+np.choose()             → selects elements from multiple arrays
+np.compress()           → selects elements using a boolean condition
+np.extract()            → extracts elements satisfying a condition
+np.select()             → selects from multiple conditions
+```
+
+---
+
+# Repeating / Tiling
+
+```text
+np.repeat()             → repeats individual elements
+np.tile()               → repeats an entire array pattern
+```
+
+Example:
+
+```python
+np.repeat([1, 2, 3], 2)
+```
+
+```text
+[1 1 2 2 3 3]
+```
+
+---
+
+# Difference / Calculus-like Operations
+
+```text
+np.diff()               → calculates differences between consecutive values
+np.ediff1d()            → calculates differences in a flattened array
+np.gradient()           → calculates numerical gradient
+```
+
+---
+
+# Clipping
+
+```text
+np.clip()               → limits values to a minimum and maximum
+```
+
+Example:
+
+```python
+np.clip([1, 5, 10, 15], 5, 10)
+```
+
+```text
+[5 5 10 10]
+```
+
+---
+
+# Random Numbers
+
+Modern NumPy:
+
+```text
+np.random.default_rng() → creates a random number generator
+```
+
+Using:
+
+```python
+rng = np.random.default_rng()
+```
+
+Then:
+
+```text
+rng.random()            → random floating-point numbers
+rng.integers()          → random integers
+rng.uniform()           → random values from uniform distribution
+rng.normal()            → random values from normal distribution
+rng.standard_normal()   → standard normal random values
+rng.binomial()          → random values from binomial distribution
+rng.poisson()           → random values from Poisson distribution
+rng.exponential()       → random values from exponential distribution
+rng.gamma()             → random values from gamma distribution
+rng.beta()              → random values from beta distribution
+rng.choice()            → randomly selects elements
+rng.shuffle()           → randomly shuffles an array
+rng.permutation()       → returns a random permutation
+```
+
+---
+
+# Linear Algebra
+
+```text
+np.dot()                → dot product
+np.vdot()               → vector dot product
+np.inner()              → inner product
+np.outer()              → outer product
+np.matmul()             → matrix multiplication
+np.cross()              → cross product
+np.tensordot()          → tensor dot product
+np.einsum()             → Einstein summation
+```
+
+Matrix operations:
+
+```text
+np.linalg.inv()         → inverse of a matrix
+np.linalg.det()         → determinant
+np.linalg.matrix_rank() → rank of a matrix
+np.linalg.matrix_power()→ raises a matrix to a power
+np.linalg.solve()       → solves a system of linear equations
+np.linalg.norm()        → calculates vector/matrix norm
+np.linalg.pinv()        → pseudo-inverse
+np.linalg.cond()        → condition number
+np.linalg.lstsq()       → least-squares solution
+np.linalg.slogdet()     → sign and log determinant
+```
+
+Eigenvalues:
+
+```text
+np.linalg.eig()         → eigenvalues and eigenvectors
+np.linalg.eigh()        → eigenvalues/eigenvectors for symmetric/Hermitian matrices
+np.linalg.eigvals()     → eigenvalues only
+np.linalg.eigvalsh()    → eigenvalues for symmetric/Hermitian matrices
+```
+
+Decomposition:
+
+```text
+np.linalg.svd()         → singular value decomposition
+np.linalg.qr()          → QR decomposition
+np.linalg.cholesky()    → Cholesky decomposition
+```
+
+---
+
+# Fourier Transform
+
+```text
+np.fft.fft()            → 1D Fourier transform
+np.fft.ifft()           → inverse 1D Fourier transform
+np.fft.fft2()           → 2D Fourier transform
+np.fft.ifft2()          → inverse 2D Fourier transform
+np.fft.fftn()           → N-dimensional Fourier transform
+np.fft.ifftn()          → inverse N-dimensional Fourier transform
+
+np.fft.rfft()           → real-input Fourier transform
+np.fft.irfft()          → inverse real-input Fourier transform
+
+np.fft.fftfreq()        → Fourier sample frequencies
+np.fft.rfftfreq()       → frequencies for rFFT
+
+np.fft.fftshift()       → shifts zero-frequency component to center
+np.fft.ifftshift()      → reverses fftshift
+```
+
+---
+
+# Histogram / Data Distribution
+
+```text
+np.histogram()          → calculates histogram
+np.histogram2d()        → calculates 2D histogram
+np.histogramdd()        → calculates multidimensional histogram
+np.histogram_bin_edges()→ calculates histogram bin edges
+np.bincount()           → counts occurrences of non-negative integers
+```
+
+---
+
+# Correlation / Covariance
+
+```text
+np.corrcoef()           → calculates correlation coefficients
+np.cov()                → calculates covariance matrix
+```
+
+---
+
+# Broadcasting
+
+```text
+np.broadcast_to()       → broadcasts an array to a specified shape
+np.broadcast_arrays()   → broadcasts multiple arrays to compatible shapes
+np.broadcast_shapes()   → determines broadcast-compatible shape
+```
+
+---
+
+# Copy / Memory
+
+```text
+np.copy()               → creates a copy of an array
+np.copyto()             → copies values into an existing array
+np.shares_memory()      → checks whether arrays share memory
+np.may_share_memory()   → checks whether arrays might share memory
+np.ascontiguousarray()  → returns a C-contiguous array
+np.asfortranarray()     → returns a Fortran-contiguous array
+```
+
+---
+
+# Input / Output
+
+```text
+np.save()               → saves an array as .npy
+np.load()               → loads a NumPy file
+np.savez()              → saves multiple arrays in .npz
+np.savez_compressed()   → saves compressed .npz file
+
+np.savetxt()            → saves an array as text
+np.loadtxt()            → loads data from text
+np.genfromtxt()         → loads text data with missing-value support
+```
+
+---
+
+# Data Types
+
+```text
+np.int8                  → 8-bit integer
+np.int16                 → 16-bit integer
+np.int32                 → 32-bit integer
+np.int64                 → 64-bit integer
+
+np.uint8                 → unsigned 8-bit integer
+np.uint16                → unsigned 16-bit integer
+np.uint32                → unsigned 32-bit integer
+np.uint64                → unsigned 64-bit integer
+
+np.float16               → 16-bit floating point
+np.float32               → 32-bit floating point
+np.float64               → 64-bit floating point
+
+np.complex64             → 64-bit complex number
+np.complex128            → 128-bit complex number
+
+np.bool_                 → NumPy Boolean type
+np.str_                  → NumPy string type
+np.bytes_                → NumPy bytes type
+np.object_               → NumPy object type
+```
+
+---
+
+# Constants
+
+```text
+np.pi                    → π
+np.e                     → Euler's number
+np.inf                   → infinity
+np.nan                   → Not-a-Number
+np.euler_gamma            → Euler-Mascheroni constant
+```
+
+---
+
+# Polynomial
+
+```text
+np.polynomial.Polynomial → represents a polynomial
+np.polynomial.Chebyshev  → Chebyshev polynomial
+np.polynomial.Legendre   → Legendre polynomial
+np.polynomial.Laguerre   → Laguerre polynomial
+np.polynomial.Hermite    → Hermite polynomial
+np.polynomial.HermiteE   → probabilists' Hermite polynomial
+```
+
+---
+
+## ⭐ If you're learning NumPy for Data Science / ML
+
+Don't try to memorize all of that. The **core 30-ish** that you'll repeatedly use are:
+
+```text
+np.array()        → creates array
+np.arange()       → creates range of values
+np.linspace()     → creates evenly spaced values
+np.zeros()        → creates zeros
+np.ones()         → creates ones
+
+np.shape          → shape information
+a.ndim            → number of dimensions
+a.size            → number of elements
+a.dtype           → data type
+
+np.reshape()      → changes shape
+np.concatenate()  → joins arrays
+np.vstack()       → vertical stacking
+np.hstack()       → horizontal stacking
+
+np.sum()          → sum
+np.mean()         → average
+np.median()       → median
+np.std()          → standard deviation
+np.var()          → variance
+np.min()          → minimum
+np.max()          → maximum
+
+np.argmax()       → index of maximum
+np.argmin()       → index of minimum
+np.where()        → conditional selection
+np.unique()       → unique values
+np.sort()         → sorting
+
+np.abs()          → absolute value
+np.sqrt()         → square root
+np.exp()          → e^x
+np.log()          → logarithm
+
+np.random.default_rng() → random generator
+
+np.dot()          → dot product
+np.matmul()       → matrix multiplication
+np.linalg.inv()   → matrix inverse
+np.linalg.det()   → determinant
+```
+

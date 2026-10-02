@@ -1,0 +1,21 @@
+employee_id,name,state,skill,age,salary,performance_rating,joining_date,active
+1001,Arun,Kerala,Python,24,45000,4.2,2026-01-15,Yes
+1002,Meera,Tamil Nadu,Java,29,62000,4.7,2026-02-03,Yes
+1003,Rahul,Karnataka,Python,22,38000,3.8,2026-02-18,No
+1004,Anjali,Kerala,JavaScript,31,70000,4.5,2026-03-01,Yes
+1005,Vishnu,Kerala,Django,27,55000,4.0,2026-03-12,Yes
+1006,Sneha,Maharashtra,Python,35,82000,4.8,2026-03-25,Yes
+1007,Adithya,Karnataka,React,24,48000,3.5,2026-04-04,No
+1008,Nikhil,Kerala,C++,28,60000,4.1,2026-04-19,Yes
+1009,Fathima,Tamil Nadu,Python,26,52000,4.6,2026-05-07,Yes
+1010,Joel,Kerala,Java,32,68000,3.9,2026-05-22,No
+1011,Devika,Karnataka,Django,23,41000,4.3,2026-06-02,Yes
+1012,Sanjay,Maharashtra,React,30,64000,3.7,2026-06-18,Yes
+1013,Akhil,Kerala,Python,25,47000,4.4,2026-07-05,Yes
+1014,Lakshmi,Tamil Nadu,JavaScript,34,76000,4.9,2026-07-21,Yes
+1015,Rohit,Karnataka,C++,29,58000,3.6,2026-08-09,No
+1016,Amal,Kerala,Python,21,35000,3.2,2026-08-24,No
+1017,Priya,Maharashtra,Django,33,73000,4.7,2026-09-01,Yes
+1018,Manu,Kerala,React,26,51000,4.0,2026-09-10,Yes
+1019,Divya,Tamil Nadu,Python,28,59000,4.5,2026-09-15,Yes
+1020,Sreehari,Karnataka,Java,36,85000,4.2,2026-09-20,No
